@@ -57,3 +57,51 @@ void WelcomeScreen(void)
 	getch();
 	system("cls"); //clearing the screen here
 }
+
+
+void Title(void)
+{
+	printf("\n\n\t\t ----------------------------------------------------------");
+	printf("\n\t\t\t\t Sans Hospital        ");
+	printf("\n\t\t-------------------------------------------------------------");
+}
+
+
+void MainMenu(void)
+{
+	system("cls");
+	int choose;
+	printf("\n\n\n\n\n\t\t\t\t1. Add Patients Record\n");
+	printf("\n\t\t\t\t2. List Patients Record\n");
+	printf("\n\t\t\t\t3. Search Patients Record\n");
+	printf("\n\t\t\t\t4. Edit Patients Record\n");
+	printf("\n\t\t\t\t5. Delete Patients Record\n");
+	printf("\n\t\t\t\t6. Exit\n");
+	printf("\n\n\n\n\t\t\t\t Choose from 1 to 6: ");
+	scanf("%d", &choose);
+	
+	switch(choose)
+	{
+		case 1:
+			Add_rec();
+			break;
+		case 2:
+			func_list();
+			break;
+		case 3:
+			Search_rec();
+			break;
+		case 4:
+			Edit_rec();
+			break;
+		case 5:
+			Dlt_rec();
+			break;
+		case 6:
+			ex_it();
+			break;
+		default:
+			printf("\t\t\t Invalid entry. Please enter correct option: ");
+			getch();	
+	}
+}
