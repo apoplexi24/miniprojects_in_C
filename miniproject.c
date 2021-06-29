@@ -20,3 +20,22 @@ void Edit_rec(void); // function to edit patient record
 void Dlt_rec(void); // function to delete patient record
 void ex_it(void); // exit function
 
+void gotoxy(short x, short y)
+{
+	COORD pos = {x, y}; // sets co-ordinates in (x,y)
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+// global variables
+struct patient
+{
+	int age;
+	char Gender;
+	char First_Name[20];
+	char Last_Name[20];
+	char Contact_no[15];
+	char Address[30];
+	char Email[30];
+	char Doctor[20];
+	char Problem[20];
+}
