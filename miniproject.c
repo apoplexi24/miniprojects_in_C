@@ -38,4 +38,22 @@ struct patient
 	char Email[30];
 	char Doctor[20];
 	char Problem[20];
+};
+
+struct patient p, temp_c;
+main(void)
+{
+	WelcomeScreen();
+	Title();
+	LoginScreen();
+}
+
+void WelcomeScreen(void)
+{	printf("\n\n\n\n\n\n\n\t\t\t\t##########################################");
+	printf("\n\t\t\t\t#\t\t Welcome to \t \t#");
+	printf("\t\t\t\n Sans Hospital \n");
+	printf("\n\n\n\n\n\n\n\t\t\t\t##########################################");
+	printf("\n\n\n\n\n Press any key to continue");
+	getch();
+	system("cls"); //clearing the screen here
 }
