@@ -10,8 +10,13 @@ int ok;
 int b, valid = 0;
 
 // functions being declared
-void WelcomeScreen(void);
-void Title(void);
-void MainMenu(void);
-void LoginScreen(void);
+void WelcomeScreen(void); // WelcomeScreen function
+void Title(void); //Title function
+void MainMenu(void); // Main Menu function
+void LoginScreen(void); // Login Screen function
+void Add_rec(void); // function to Add patient record
+void Search_rec(void); // function to search patent record
+void Edit_rec(void); // function to edit patient record
+void Dlt_rec(void); // function to delete patient record
+void ex_it(void); // exit function
 
