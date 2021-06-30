@@ -78,7 +78,7 @@ void MainMenu(void)
 	printf("\n\t\t\t\t5. Delete Patients Record\n");
 	printf("\n\t\t\t\t6. Exit\n");
 	printf("\n\n\n\n\t\t\t\t Choose from 1 to 6: ");
-	scanf("%d", &choose);
+	scanf("%i", &choose);
 	
 	switch(choose)
 	{
@@ -244,4 +244,27 @@ void Add_rec(void)
 	while(!ok);
 	
 	//Age entry
+	printf("\n\t\t\t Age: ");
+	scanf(" %i", &p.age);
+	
+	//Address entry
+	do
+	{
+		C:
+		printf("\n\t\t\t Address: ");
+		scanf("%s", p.Address);
+		p.Address[0]=toupper(p.Address[0]);
+		if(strlen(p.Address) > 20 || strlen(p.Address) < 4)
+		{
+			printf("\n\t Invalid \t The range of address is 4 chars to 20 chars. Please enter address again.");
+			goto C;
+		}
+	} 
+	while(!valid);
+	
+	// Contact number
+	do
+	{
+		
+	}
 }
