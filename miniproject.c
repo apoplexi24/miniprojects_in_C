@@ -270,7 +270,7 @@ void Add_rec(void)
 		scanf("%s",p.Contact_no);
 		if(strlen(p.Contact_no) > 10 || strlen(p.Contact_no)!=10)
 		{
-			printf("\n\t Invalid Entry. Contact number must comtain 10 numbers. Please enter number again.");
+			printf("\n\t Invalid Entry. Contact number must contain 10 numbers. Please enter number again.");
 			goto D;
 		}
 		else
@@ -299,6 +299,45 @@ void Add_rec(void)
 	// email entry
 	do
 	{
-		printf("\n")
+		printf("\n\t\t\t Email: ");
+		scanf("%s", p.Email);
+		if(strlen(p.Email) > 30 || strlen(p.Email) < 8)
+		{
+			printf("\n\t Invalid Entry. Range of email is 8 chars to 30 chars. Please enter email again. ");
+		}
 	}
+	while(strlen(p.Email) > 30 || strlen(p.Email) < 8);
+	
+	// Problem entry
+	
+	E:
+	printf("\n\t\t\t Problem: ");
+	scanf("%s", p.Problem);
+	p.Problem[0] = toupper(p.Problem[0]);
+	if(strlen(p.Problem) > 15 || strlen(p.Problem) < 3)
+	{
+		printf("\n\t Invalid Entry. Range of problem is from 3 chars to 15 chars.");
+		goto E;
+	}
+	else 
+	{
+		for(b = 0; b < strlen(p.Problem); b++)
+		{
+			if (isalpha(p.Problem[b]))
+			{
+				valid = 1;
+			}
+			else 
+			{
+				valid = 0;
+				break;
+			}
+		}
+		if(!valid)
+		{
+			printf("\n\t\t Problem contains invalid characters. Please enter problem again. ");
+			goto E;
+		}
+	}
+	// Prescribed Doctor
 }
