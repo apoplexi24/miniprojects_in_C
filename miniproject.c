@@ -265,6 +265,40 @@ void Add_rec(void)
 	// Contact number
 	do
 	{
-		
+		D:
+		printf("\n\t\t\t Contact no: ");
+		scanf("%s",p.Contact_no);
+		if(strlen(p.Contact_no) > 10 || strlen(p.Contact_no)!=10)
+		{
+			printf("\n\t Invalid Entry. Contact number must comtain 10 numbers. Please enter number again.");
+			goto D;
+		}
+		else
+		{
+			for(b = 0; b < strlen(p.Contact_no);b++)
+			{
+				if(!isalpha(p.Contact_no[b])
+				{
+					valid = 1;
+				}
+				else
+				{
+					valid = 0;
+					break;
+				}
+			}
+			if(!valid)
+			{
+				printf("\n\t\t Contact number contains invalid characters. Please enter number again.");
+				
+			}
+		}
+	}
+	while(!valid);
+	
+	// email entry
+	do
+	{
+		printf("\n")
 	}
 }
