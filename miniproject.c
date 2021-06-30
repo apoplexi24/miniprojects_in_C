@@ -340,4 +340,34 @@ void Add_rec(void)
 		}
 	}
 	// Prescribed Doctor
+	F:
+	printf("\n\t\t\t Prescribed Doctor: ");
+	scanf("%s", p.Doctor);
+	p.Doctor[0]=toupper(p.Doctor[0]);
+	if (strlen(p.Doctor) > 30 || strlen(p.Doctor) < 3)
+	{
+		printf("\n\t Invalid Entry. Range of Doctor name is 3 chars to 30 chars.");
+		goto F;
+	}
+	else
+	{
+		for(b = 0; b < strlen(p.Doctor); b++)
+		{
+			if(isalpha(p.Doctor[b]))
+			{
+				valid = 1;
+			}
+			else
+			{
+				valid = 0;
+				break;
+			}
+		}
+		if(!valid)
+		{
+			printf("\n\t\t Doctor Name contains invalid characters. Please enter Doctor name again.");
+			goto F;
+		}
+	}
 }
+
