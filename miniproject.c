@@ -156,5 +156,70 @@ void LoginScreen(void)
 
 void Add_rec(void)
 {
+	system("cls");
+	Title();
+	char ans;
+	FILE*ek;
+	ek=fopen("Record2.dat", "a"); //opening the file in write mode
+	printf("\n\n\t\t\t\t Add Patient Record \n");
 	
+	A:
+	printf("\n\t\t\t First Name: ");
+	scanf("%s", p.First_Name);
+	p.First_Name[0]=toupper(p.First_Name[0]);
+	if(strlen(p.First_Name) > 20 || strlen(p.First_Name) < 2)
+	{
+		printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
+		goto A;
+	}
+	else
+	{
+		for(b = 0; b < strlen(p.First_Name); b++)
+		{
+			if(isalpha(p.First_Name[b]))
+			{
+				valid = 1;
+			}
+			else
+			{
+				valid = 0;
+				break;
+			}
+		}
+		if(!valid)
+		{
+			printf("\n\t\t First Name contains invalid characters. Please try again.\n");
+			goto A;
+		}
+	}
+	
+	B:
+	printf("\n\t\t\t Last Name: ");
+	scanf("%s", p.Last_Name);
+	p.Last_Name[0]=toupper(p.Last_Name[0]);
+	if(strlen(p.Last_Name) > 20 || strlen(p.Last_Name) < 2)
+	{
+		printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
+		goto B;
+	}
+	else
+	{
+		for(b = 0; b < strlen(p.Last_Name); b++)
+		{
+			if(isalpha(p.Last_Name[b]))
+			{
+				valid = 1;
+			}
+			else
+			{
+				valid = 0;
+				break;
+			}
+		}
+		if(!valid)
+		{
+			printf("\n\t\t Last Name contains invalid characters. Please try again.\n");
+			goto B;
+		}
+	}
 }
