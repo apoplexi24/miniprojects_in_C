@@ -395,3 +395,104 @@ void Add_rec(void)
 	}
 }
 
+void Edit_rec(void)
+{
+	FILE *ek, *ft;
+	int i, b, valid = 0;
+	char ch;
+	char name[20];
+	system("cls");
+	Title();
+	ft = fopen("temp2.dat","w+");
+	ek = fopen("Record2.dat","r");
+	if(ek == NULL)
+	{
+		printf("\n\t Can't open file. ");
+		getch();
+		MainMenu();
+	}
+	printf("\n\n\t\t\t Edit Patient Record \n");
+	gotoxy(12,13);
+	printf("Enter the First Name of the Patient: ");
+	scanf(" %s", name);
+	fflush(stdin);
+	name[0] = toupper(name[0]);
+	gotoxy(12,15);
+	if(ft == NULL)
+	{
+		printf("\n Can't open file. ");
+		getch();
+		MainMenu();
+	}
+	while(fscanf(ek, " %s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor))
+	{
+		if(strcmp(p.First_Name, name) == 0)
+		{
+			valid = 1;
+			gotoxy(25,17);
+			printf("*** Existing Record ***");
+			gotoxy(10,19);
+			printf(" %s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \t%s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor);
+			
+			gotoxy(12,22);
+			printf("Enter New First Name: ");
+			scanf("%s", p.First_Name);
+			
+			gotoxy(12,24);
+			printf("Enter New Last Name: ");
+			scanf("%s", p.Last_Name);
+			
+			gotoxy(12,26);
+			printf("Enter Gender: ");
+			scanf("%c", p.Gender);
+			
+			gotoxy(12,28);
+			printf("Enter Age: ");
+			scanf("%i", p.age);
+			
+			gotoxy(12,30);
+			printf("Enter new Address: ");
+			scanf("%s", p.Address);
+			
+			gotoxy(12,32);
+			printf("Enter new Contact Number: ");
+			scanf("%s", p.Contact_no);
+			
+			gotoxy(12,34);
+			printf("Enter new email: ");
+			scanf("%s", p.Last_Name);
+			
+			gotoxy(12,36);
+			printf("Enter Problem: ");
+			scanf("%s", p.Problem);
+			p.Problem[0] = toupper(p.Problem[0]);
+			
+			gotoxy(12,38);
+			printf("Enter Doctor: ");
+			scanf("%s", p.Doctor);
+			p.Doctor[0] = toupper(p.Doctor[0]);
+			
+			printf("\n Press U character for updating operation: ");
+			ch = getch();
+			if(ch == 'u' || ch == 'U')
+			{
+				fprintf(ft, "%s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor);
+				printf("\n\n\t\t\t Patient Record updated successfully...");
+			}
+		}
+		else
+		{
+			fprintf(ft, "%s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \t%s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor);
+		}
+	}
+	if(!valid)
+	{
+		printf("\n\t\t No Record Found...");
+	}
+	fclose(ft);
+	fclose(ek);
+	rename("temp2.dat", "Recprd2.dat");
+	getch();
+	MainMenu();
+}
+
