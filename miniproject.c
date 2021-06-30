@@ -222,4 +222,26 @@ void Add_rec(void)
 			goto B;
 		}
 	}
+	
+	// Sex of Patient entry
+	do
+	{
+		printf("\n\t\t\t Gender[F/M]: ");
+		scanf(" %c", &p.Gender);
+		if(toupper(p.Gender) == 'M' || toupper(p.Gender) = 'F')
+		{
+			ok = 1;
+		}
+		else
+		{
+			ok = 0;
+		}
+		if(!ok)
+		{
+			printf("\n\t\t Gender field contains Invalid Character. Please enter either F or M.");	
+		}
+	}
+	while(!ok);
+	
+	//Age entry
 }
