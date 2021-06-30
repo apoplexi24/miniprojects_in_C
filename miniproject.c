@@ -105,3 +105,56 @@ void MainMenu(void)
 			getch();	
 	}
 }
+
+void ex_it(void)
+{
+	system("cls");
+	Title();
+	printf("\n\n\n\n\n\t\t\tThank you for visiting. ");
+	getch();
+}
+
+void LoginScreen(void)
+{
+	int e = 0;
+	char Username[25];
+	char Password[15];
+	char original_Username[25]="shiva";
+	char original_Password[15]="1234";
+	do
+	{
+		printf("\n\n\n\n\t\t\t\t Enter your Username and Password: ");
+		printf("\n\n\n\t\t\t\t\t Username: ");
+		scanf("%s", &Username);
+		printf("\n\n\t\t\t\t\t Password: ");
+		scanf("%s", &Password);
+		if (strcmp(Username, original_Username) == 0 && strcmp(Password, original_Password) == 0)
+		{
+			printf("\n\n\n\t\t\t\t\t Login Successful ");
+			getch();
+			MainMenu();
+			break;
+		}
+		else 
+		{
+			printf("\n\t\t\t Password is incorrect. Please Try Again. ");
+			e++;
+			getch();
+		}
+	} 
+	while (e <= 2);
+	
+	if(e>3)
+	{
+		printf("You have crossed the limit. Exiting program.");
+		getch();
+		ex_it();
+	}
+	system("cls");
+	
+}
+
+void Add_rec(void)
+{
+	
+}
