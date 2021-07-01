@@ -160,7 +160,7 @@ void Add_rec(void)
 	Title();
 	char ans;
 	FILE*ek;
-	ek=fopen("Record2.dat", "a"); //opening the file in write mode
+	ek = fopen("Record2.txt", "a"); //opening the file in write mode
 	printf("\n\n\t\t\t\t Add Patient Record \n");
 	
 	A:
@@ -223,7 +223,7 @@ void Add_rec(void)
 		}
 	}
 	
-	// Sex of Patient entry
+	// Gender of Patient entry
 	do
 	{
 		printf("\n\t\t\t Gender[F/M]: ");
@@ -401,7 +401,7 @@ void func_list()
 	system("cls");
 	Title();
 	FILE*ek;
-	ek=fopen("Record2.dat","r");
+	ek=fopen("Record2.txt","r");
 	printf("\n\n\t\t\t\tList of Patient Records\n");
 		gotoxy(1,15);
 		printf("Full Name");
@@ -451,7 +451,7 @@ void Search_rec(void)
 	system("cls");
 	Title(); //calling the Title function
 	FILE *ek;
-	ek=fopen("Record2.dat","r");
+	ek=fopen("Record2.txt","r");
 	printf("\n\n\t\t\t\tSearch Patient Records\n");
 	gotoxy(12,8);
 	printf("\n Enter the Patient Name to be viewed: ");
@@ -534,8 +534,8 @@ void Edit_rec(void)
 	char name[20];
 	system("cls");
 	Title();
-	ft = fopen("temp2.dat","w+");
-	ek = fopen("Record2.dat","r");
+	ft = fopen("temp2.txt","w+");
+	ek = fopen("Record2.txt","r");
 	if(ek == NULL)
 	{
 		printf("\n\t Can't open file. ");
@@ -622,7 +622,7 @@ void Edit_rec(void)
 	}
 	fclose(ft);
 	fclose(ek);
-	rename("temp2.dat", "Recprd2.dat");
+	rename("temp2.txt", "Record2.txt");
 	getch();
 	MainMenu();
 }
@@ -633,8 +633,8 @@ void Dlt_rec()
 	system("cls");
 	Title();
 	FILE *ek, *ft;
-	ft=fopen("temp_file2.dat","w+");
-	ek=fopen("Record2.dat","r");
+	ft=fopen("temp_file2.txt","w+");
+	ek=fopen("Record2.txt","r");
 	printf("\n\n\t\t\t\tDelete Patient Record\n");
 	gotoxy(12,8);
 	printf("Enter Patient name to delete: ");
@@ -661,8 +661,7 @@ void Dlt_rec()
 	{
 		fclose(ek);
 		fclose(ft);
-		remove("Record2.dat");
-		rename("temp_file2.dat","Record2.dat");
+		remove("Record2.txt");
 		printf("\n\n\t\t\t Record deleted successfully.");
 		getch();
 		MainMenu();
