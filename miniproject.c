@@ -12,7 +12,7 @@ int b, valid = 0;
 void WelcomeScreen(void); // WelcomeScreen function
 void Title(void); //Title function
 void MainMenu(void); // Main Menu function
-// void LoginScreen(void); // Login Screen function
+void LoginScreen(void); // Login Screen function
 void Add_rec(void); // function to Add patient record
 void Search_rec(void); // function to search patent record
 void Edit_rec(void); // function to edit patient record
@@ -33,7 +33,6 @@ struct patient
 	char First_Name[20];
 	char Last_Name[10];
 	char Contact_no[15];
-	char Address[20];
 	char Email[20];
 	char Doctor[20];
 	char Problem[20];
@@ -114,9 +113,8 @@ void ex_it(void)
 	getch();
 }
 
-/*
 void LoginScreen(void)
-{
+{ 
 	int e = 0;
 	char Username[25];
 	char Password[15];
@@ -154,7 +152,8 @@ void LoginScreen(void)
 	system("cls");
 	
 }
-*/
+
+
 void Add_rec(void)
 {
 	system("cls");
@@ -256,23 +255,7 @@ void Add_rec(void)
 	//Age entry
 	printf("\n\t\t\t Age: ");
 	scanf(" %i", &p.age);
-	
-	//Address entry
-	int C = 0;
-	do
-	{
-		C = 0;
-		printf("\n\t\t\t Address: ");
-		gets(p.Address);
-		p.Address[0]=toupper(p.Address[0]);
-		if(strlen(p.Address) > 20 || strlen(p.Address) < 4)
-		{
-			printf("\n\t Invalid \t The range of address is 4 chars to 20 chars. Please enter address again.");
-			C = 1;
-		}
-	} 
-	while(C != 0);
-	
+
 	// Contact number
 	int D = 0;
 	do
@@ -393,7 +376,7 @@ void Add_rec(void)
 	}
 	while (F != 0);
 	
-	fprintf(ek, " %s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
+	fprintf(ek, " %s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Contact_no, p.Email, p.Problem, p.Doctor);
 	printf("\n\n\t\t\t Information Recorded Successfully");
 	fclose(ek); // ek file is closed
 	
@@ -402,7 +385,7 @@ void Add_rec(void)
 	{
 		G = 0;
 		getch();
-		printf("\n\n\t\t\t Do you want more records [Y/N]? ");
+		printf("\n\n\t\t\t Do you want more records [Y/N]?: ");
 		scanf(" %c", &ans);
 		if(toupper(ans) == 'Y')
 		{
@@ -421,9 +404,9 @@ void Add_rec(void)
 		}
 	}
 	while(G != 0);
-	
 }
 
+// display records of patients
 void func_list()
 {
 	int num = 1;
@@ -432,7 +415,7 @@ void func_list()
 	FILE*ek;
 	ek=fopen("Record2.txt","r");
 	printf("\n\n\t\t\t\tList of Patient Records\n");
-	while(fscanf(ek,"%s %s %c %i %s %s %s %s %s\n", &p.First_Name, &p.Last_Name, &p.Gender, &p.age, &p.Address, &p.Contact_no, &p.Email, &p.Problem, &p.Doctor)!=EOF)
+	while(fscanf(ek,"%s %s %c %i %s %s %s %s\n", &p.First_Name, &p.Last_Name, &p.Gender, &p.age, &p.Contact_no, &p.Email, &p.Problem, &p.Doctor)!=EOF)
 	{
 		printf("Patient Number - %d", num);
 		printf("\n");
@@ -440,7 +423,6 @@ void func_list()
 		printf("%s %s \n", p.First_Name, p.Last_Name);
 		printf("Gender: %c \n", p.Gender);
 		printf("Age: %i \n", p.age);
-		printf("Address: %s \n", p.Address);
 		printf("Email : %s \n", p.Email);
 		printf("Contact Number: %s \n", p.Contact_no);
 		printf("Problem: %s \n", p.Problem);
@@ -460,51 +442,27 @@ void Search_rec(void)
 	Title(); //calling the Title function
 	FILE *ek;
 	ek=fopen("Record2.txt","r");
-	printf("\n\n\t\t\t\tSearch Patient Records\n");
+	printf("\n\n\t\t\t\tSearch Patient Records\n\n");
 	gotoxy(12,8);
 	printf("\n Enter the Patient Name to be viewed: ");
 	scanf("%s",name);
+	printf("\n\n");
 	fflush(stdin); // clears output buffer
 	name[0]=toupper(name[0]);
-	while(fscanf(ek,"%s %s %c %i %s %s %s %s %s\n", p.First_Name, p.Last_Name, &p.Gender, &p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
+	while(fscanf(ek,"%s %s %c %i %s %s %s %s\n", p.First_Name, p.Last_Name, &p.Gender, &p.age, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
 	{
 		if(strcmp(p.First_Name, name)==0)
 		{
-			gotoxy(1,15);
-			printf("Full Name");
-			gotoxy(25,15);
-			printf("Gender");
-			gotoxy(32,15);
-			printf("Age");
-			gotoxy(37,15);
-			printf("Address");
-			gotoxy(52,15);
-			printf("Contact No.");
-			gotoxy(64,15);
-			printf("Email");
-			gotoxy(80,15);
-			printf("Problem");
-			gotoxy(95,15);
-			printf("Assigned Doctor");
-			printf("\n------------------------------------------------------------------------------------------------------------------------------------");
-			gotoxy(1,18);
-			printf("%s %s", p.First_Name, p.Last_Name);
-			gotoxy(25,18);
-			printf("%c", p.Gender);
-			gotoxy(34,18);
-			printf("%i", p.age);
-			gotoxy(37,18);
-			printf("%s", p.Address);
-			gotoxy(58,18);
-			printf("%s", p.Contact_no);
-			gotoxy(64,18);
-			printf("%s", p.Email);
-			gotoxy(80,18);
-			printf("%s", p.Problem);
-			gotoxy(95,18);
-			printf("%s", p.Doctor);
+			printf("Patient Details of %s %s", p.First_Name, p.Last_Name);
 			printf("\n");
-			break;
+			printf("Full Name: ");
+			printf("%s %s \n", p.First_Name, p.Last_Name);
+			printf("Gender: %c \n", p.Gender);
+			printf("Age: %i \n", p.age);
+			printf("Email : %s \n", p.Email);
+			printf("Contact Number: %s \n", p.Contact_no);
+			printf("Problem: %s \n", p.Problem);
+			printf("Assigned Doctor: %s \n \n", p.Doctor);
 		}
 	}
 	if(strcmp(p.First_Name, name)!=0)
@@ -514,154 +472,153 @@ void Search_rec(void)
 		getch();
 	}
 	fclose(ek);
-	L:
-	getch();
-	printf("\n\n\t\t\tDo you want to view more?[Y/N]");
-	scanf("%c",&ans);
-	if(toupper(ans)=='Y')
+	int A;
+	do
 	{
-		Search_rec();
-	}
-	else if(toupper(ans)=='N')
-	{
-		printf("\n\t\t Thank You!");
+		A = 0;
 		getch();
-		MainMenu();
-	}
-	else
-	{
-		printf("\n\tInvalid Input.\n");
-		goto L;
-	}
-}
-void Edit_rec(void)
-{
-	FILE *ek, *ft;
-	int i, b, valid = 0;
-	char ch;
-	char name[20];
-	system("cls");
-	Title();
-	ft = fopen("temp2.txt","w+");
-	ek = fopen("Record2.txt","r");
-	if(ek == NULL)
-	{
-		printf("\n\t Can't open file. ");
-		getch();
-		MainMenu();
-	}
-	printf("\n\n\t\t\t Edit Patient Record \n");
-	gotoxy(12,13);
-	printf("Enter the First Name of the Patient: ");
-	scanf(" %s", name);
-	fflush(stdin);
-	name[0] = toupper(name[0]);
-	gotoxy(12,15);
-	if(ft == NULL)
-	{
-		printf("\n Can't open file. ");
-		getch();
-		MainMenu();
-	}
-	while(fscanf(ek, " %s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor))
-	{
-		if(strcmp(p.First_Name, name) == 0)
+		printf("\n\n\t\t\tDo you want to view more?[Y/N]");
+		scanf("%c",&ans);
+		if(toupper(ans)=='Y')
 		{
-			valid = 1;
-			gotoxy(25,17);
-			printf("*** Existing Record ***");
-			gotoxy(10,19);
-			printf(" %s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \t%s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor);
-			
-			gotoxy(12,22);
-			printf("Enter New First Name: ");
-			scanf("%s", p.First_Name);
-			
-			gotoxy(12,24);
-			printf("Enter New Last Name: ");
-			scanf("%s", p.Last_Name);
-			
-			gotoxy(12,26);
-			printf("Enter Gender: ");
-			scanf("%c", p.Gender);
-			
-			gotoxy(12,28);
-			printf("Enter Age: ");
-			scanf("%i", p.age);
-			
-			gotoxy(12,30);
-			printf("Enter new Address: ");
-			scanf("%s", p.Address);
-			
-			gotoxy(12,32);
-			printf("Enter new Contact Number: ");
-			scanf("%s", p.Contact_no);
-			
-			gotoxy(12,34);
-			printf("Enter new email: ");
-			scanf("%s", p.Last_Name);
-			
-			gotoxy(12,36);
-			printf("Enter Problem: ");
-			scanf("%s", p.Problem);
-			p.Problem[0] = toupper(p.Problem[0]);
-			
-			gotoxy(12,38);
-			printf("Enter Doctor: ");
-			scanf("%s", p.Doctor);
-			p.Doctor[0] = toupper(p.Doctor[0]);
-			
-			printf("\n Press U character for updating operation: ");
-			ch = getch();
-			if(ch == 'u' || ch == 'U')
-			{
-				fprintf(ft, "%s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
-				printf("\n\n\t\t\t Patient Record updated successfully...");
-			}
+			Search_rec();
+		}
+		else if(toupper(ans)=='N')
+		{
+			printf("\n\t\t Thank You!");
+			getch();
+			MainMenu();
 		}
 		else
 		{
-			fprintf(ft, "%s \t%s \t%c \t%i \t%s \t%s \t%s \t%s \t%s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
+			printf("\n\tInvalid Input.\n");
+			A = 1;
 		}
 	}
-	if(!valid)
-	{
-		printf("\n\t\t No Record Found...");
-	}
-	fclose(ft);
-	fclose(ek);
-	rename("temp2.txt", "Record2.txt");
-	getch();
-	MainMenu();
+	while(A != 0);
 }
+
+void Edit_rec(void)
+{
+	FILE *ek, *ft;
+  int i,b, valid=0;
+  char ch;
+  char name[20];
+
+  system("cls");
+  	Title();// call Title window
+ 		ft=fopen("temp2.txt","w+");
+	   ek=fopen("Record2.txt","r");
+	   if(ek==NULL)
+	   {
+		printf("\n\t Can not open file!! ");
+		getch();
+		MainMenu();
+	   }
+       	printf("\n\n\t\t\t Edit Patients Record \n");
+	   	gotoxy(12,13);
+	   	printf("Enter the First Name of the Patient : ");
+	   	scanf(" %s",name);
+	   	fflush(stdin);
+	   	name[0]=toupper(name[0]);
+		gotoxy(12,15);
+		
+		if(ft==NULL)
+		{
+			printf("\n Can not open file");
+			getch();
+			MainMenu();
+		}
+		while(fscanf(ek,"%s %s %c %i %s %s %s %s\n", p.First_Name, p.Last_Name, &p.Gender, &p.age, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
+		{
+			if(strcmp(p.First_Name, name)==0)
+			{
+				valid=1;
+				gotoxy(25,17);
+				printf("*** Existing Record ***");
+				printf("Patient Details of %s %s", p.First_Name, p.Last_Name);
+				printf("\n");
+				printf("Full Name: ");
+				printf("%s %s \n", p.First_Name, p.Last_Name);
+				printf("Gender: %c \n", p.Gender);
+				printf("Age: %i \n", p.age);
+				printf("Email : %s \n", p.Email);
+				printf("Contact Number: %s \n", p.Contact_no);
+				printf("Problem: %s \n", p.Problem);
+				printf("Assigned Doctor: %s \n", p.Doctor);
+				printf("\n \n \n New Record Details\n\n");
+				printf("Enter New First Name: ");
+				scanf("%s",p.First_Name);    
+				printf("Enter Last Name: ");
+				scanf("%s",p.Last_Name);
+				printf("Enter Gender: ");
+				scanf(" %c",&p.Gender);
+				p.Gender=toupper(p.Gender);
+				printf("Enter age: ");
+				scanf(" %i",&p.age);
+				printf("Enter Contact no: ");
+				scanf("%s",p.Contact_no);
+				printf("Enter New email: ");
+				scanf("%s",p.Email);
+				printf("Enter Problem: ");
+				scanf("%s",p.Problem);
+				p.Problem[0]=toupper(p.Problem[0]);
+				printf("Enter Doctor: ");
+			    scanf("%s",p.Doctor);
+			    p.Doctor[0]=toupper(p.Doctor[0]);
+			    printf("\nPress U charecter for the Uptxting operation : ");
+				ch=getche();
+				if(ch=='u' || ch=='U')
+				{
+				fprintf(ft,"%s %s %c %i %s %s %s %s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Contact_no,p.Email,p.Problem,p.Doctor);
+				printf("\n\n\t\t\tPatient record updated successfully...");
+				}					
+			}
+			else
+			{
+			fprintf(ft,"%s %s %c %i %s %s %s %s\n",p.First_Name,p.Last_Name,p.Gender, p.age,p.Contact_no,p.Email,p.Problem,p.Doctor);	
+			}
+		 }
+		 if(!valid) printf("\n\t\tNO RECORD FOUND...");
+	   fclose(ft);
+	   fclose(ek);
+	   remove("Record2.txt");
+   	   rename("temp2.txt","Record2.txt");
+		getch();
+		MainMenu();		
+}
+
+
 void Dlt_rec()
 {
 	char name[20];
 	int found=0;
 	system("cls");
-	Title();
+	Title();// call Title function
 	FILE *ek, *ft;
 	ft=fopen("temp_file2.txt","w+");
 	ek=fopen("Record2.txt","r");
-	printf("\n\n\t\t\t\tDelete Patient Record\n");
+	printf("\n\n\t\t\t!!!!!!!!!!!!!! Delete Patients Record !!!!!!!!!!!!!\n");
 	gotoxy(12,8);
-	printf("Enter Patient name to delete: ");
+	printf("\n Enter Patient Name to delete: ");
 	fflush(stdin);
 	gets(name);
 	name[0]=toupper(name[0]);
-	while(fscanf(ek,"%s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
+	
+	while (fscanf(ek,"%s %s %c %i %s %s %s %s", p.First_Name, p.Last_Name, &p.Gender,
+			 &p.age, p.Contact_no, p.Email, p.Problem, p.Doctor)!=EOF)
 	{
-		if(strcmp(p.First_Name,name)!=0)
-		fprintf(ft,"%s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
-		else
+		if (strcmp(p.First_Name,name)!=0)
+		fprintf(ft,"%s %s %c %i %s %s %s %s\n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Contact_no, p.Email, p.Problem, p.Doctor);
+		else 
 		{
-			printf("%s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Problem, p.Doctor);
+			printf("%s %s %c %i %s %s %s %s\n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Contact_no, p.Email, p.Problem, p.Doctor);
 			found=1;
 		}
-	} //end of while loop
+	}//while loop ends
 	if(found==0)
 	{
-		printf("\n\n\t\t\tRecord not found.");
+		printf("\n\n\t\t\t Record not found....");
 		getch();
 		MainMenu();
 	}
@@ -670,8 +627,10 @@ void Dlt_rec()
 		fclose(ek);
 		fclose(ft);
 		remove("Record2.txt");
-		printf("\n\n\t\t\t Record deleted successfully.");
+		rename("temp_file2.txt","Record2.txt");
+		printf("\n\n\t\t\t Record deleted successfully :) ");
 		getch();
 		MainMenu();
 	}
-}
+} 
+
