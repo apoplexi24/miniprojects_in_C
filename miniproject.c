@@ -6,7 +6,6 @@
 #include<stdlib.h>
 
 char ans = 0;
-int ok;
 int b, valid = 0;
 
 // functions being declared
@@ -144,7 +143,7 @@ void LoginScreen(void)
 	} 
 	while (e <= 2);
 	
-	if(e>3)
+	if(e > 3)
 	{
 		printf("You have crossed the limit. Exiting program.");
 		getch();
@@ -163,115 +162,129 @@ void Add_rec(void)
 	ek = fopen("Record2.txt", "a"); //opening the file in write mode
 	printf("\n\n\t\t\t\t Add Patient Record \n");
 	
-	A:
-	printf("\n\t\t\t First Name: ");
-	scanf("%s", p.First_Name);
-	p.First_Name[0]=toupper(p.First_Name[0]);
-	if(strlen(p.First_Name) > 20 || strlen(p.First_Name) < 2)
-	{
-		printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
-		goto A;
-	}
-	else
-	{
-		for(b = 0; b < strlen(p.First_Name); b++)
-		{
-			if(isalpha(p.First_Name[b]))
-			{
-				valid = 1;
-			}
-			else
-			{
-				valid = 0;
-				break;
-			}
-		}
-		if(!valid)
-		{
-			printf("\n\t\t First Name contains invalid characters. Please try again.\n");
-			goto A;
-		}
-	}
-	
-	B:
-	printf("\n\t\t\t Last Name: ");
-	scanf("%s", p.Last_Name);
-	p.Last_Name[0]=toupper(p.Last_Name[0]);
-	if(strlen(p.Last_Name) > 20 || strlen(p.Last_Name) < 2)
-	{
-		printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
-		goto B;
-	}
-	else
-	{
-		for(b = 0; b < strlen(p.Last_Name); b++)
-		{
-			if(isalpha(p.Last_Name[b]))
-			{
-				valid = 1;
-			}
-			else
-			{
-				valid = 0;
-				break;
-			}
-		}
-		if(!valid)
-		{
-			printf("\n\t\t Last Name contains invalid characters. Please try again.\n");
-			goto B;
-		}
-	}
-	
-	// Gender of Patient entry
+	int A = 0;
 	do
 	{
+		A = 0;
+		printf("\n\t\t\t First Name: ");
+		scanf("%s", p.First_Name);
+		p.First_Name[0]=toupper(p.First_Name[0]);
+		if(strlen(p.First_Name) > 20 || strlen(p.First_Name) < 2)
+		{
+			printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
+			A = 1;
+		}
+		else
+		{
+			for(b = 0; b < strlen(p.First_Name); b++)
+			{
+				if(isalpha(p.First_Name[b]))
+				{
+					valid = 1;
+				}
+				else
+				{
+					valid = 0;
+					break;
+				}
+			}	
+			if(!valid)
+			{
+				printf("\n\t\t First Name contains invalid characters. Please try again.\n");
+				A = 1;
+			}
+		}
+	}
+	while (A != 0);
+	
+	int B = 0;
+	do
+	{
+		B = 0;
+		printf("\n\t\t\t Last Name: ");
+		scanf("%s", p.Last_Name);
+		p.Last_Name[0]=toupper(p.Last_Name[0]);
+		if(strlen(p.Last_Name) > 20 || strlen(p.Last_Name) < 2)
+		{
+			printf("\n\t Invalid name entered. Pls check number of characters in name.\n");
+			B = 1;
+		}
+		else
+		{
+			for(b = 0; b < strlen(p.Last_Name); b++)
+			{
+				if(isalpha(p.Last_Name[b]))
+				{
+					valid = 1;
+				}
+				else
+				{
+					valid = 0;
+					break;
+				}
+			}
+			if(!valid)
+			{
+				printf("\n\t\t Last Name contains invalid characters. Please try again.\n");
+				B = 1;
+			}
+		}
+	}
+	while (B != 0);
+	
+	// Gender of Patient entry
+
+	do
+	{
+		B = 0;
 		printf("\n\t\t\t Gender[F/M]: ");
 		scanf(" %c", &p.Gender);
 		if(toupper(p.Gender) == 'M' || toupper(p.Gender) == 'F')
 		{
-			ok = 1;
+			B = 0;
 		}
 		else
 		{
-			ok = 0;
+			B = 1;
 		}
-		if(!ok)
+		if(!B)
 		{
 			printf("\n\t\t Gender field contains Invalid Character. Please enter either F or M.");	
 		}
 	}
-	while(!ok);
+	while(!B);
 	
 	//Age entry
 	printf("\n\t\t\t Age: ");
 	scanf(" %i", &p.age);
 	
 	//Address entry
+	int C = 0;
 	do
 	{
-		C:
+		C = 0;
 		printf("\n\t\t\t Address: ");
-		scanf("%s[a-zA-Z ]", p.Address);
+		gets(p.Address);
 		p.Address[0]=toupper(p.Address[0]);
 		if(strlen(p.Address) > 20 || strlen(p.Address) < 4)
 		{
 			printf("\n\t Invalid \t The range of address is 4 chars to 20 chars. Please enter address again.");
-			goto C;
+			C = 1;
 		}
 	} 
-	while(!valid);
+	while(C != 0);
 	
 	// Contact number
+	int D = 0;
 	do
 	{
-		D:
+		D = 0;
 		printf("\n\t\t\t Contact no: ");
 		scanf("%s",p.Contact_no);
-		if(strlen(p.Contact_no) > 10 || strlen(p.Contact_no)!=10)
+		if(strlen(p.Contact_no) != 10)
 		{
 			printf("\n\t Invalid Entry. Contact number must contain 10 numbers. Please enter number again.");
-			goto D;
+			D = 1;
 		}
 		else
 		{
@@ -290,11 +303,11 @@ void Add_rec(void)
 			if(!valid)
 			{
 				printf("\n\t\t Contact number contains invalid characters. Please enter number again.");
-				
+				D = 1;
 			}
 		}
 	}
-	while(!valid);
+	while(D != 0);
 	
 	// email entry
 	do
@@ -310,89 +323,103 @@ void Add_rec(void)
 	
 	// Problem entry
 	
-	E:
-	printf("\n\t\t\t Problem: ");
-	scanf("%s", p.Problem);
-	p.Problem[0] = toupper(p.Problem[0]);
-	if(strlen(p.Problem) > 15 || strlen(p.Problem) < 3)
+	int E = 0;
+	do
 	{
-		printf("\n\t Invalid Entry. Range of problem is from 3 chars to 15 chars.");
-		goto E;
-	}
-	else 
-	{
-		for(b = 0; b < strlen(p.Problem); b++)
+		E = 0;
+		printf("\n\t\t\t Problem: ");
+		scanf("%s", p.Problem);
+		p.Problem[0] = toupper(p.Problem[0]);
+		if(strlen(p.Problem) > 15 || strlen(p.Problem) < 3)
 		{
-			if (isalpha(p.Problem[b]))
+			printf("\n\t Invalid Entry. Range of problem is from 3 chars to 15 chars.");
+			E = 1;
+		}
+		else 
+		{
+			for(b = 0; b < strlen(p.Problem); b++)
 			{
-				valid = 1;
+				if (isalpha(p.Problem[b]))
+				{
+					valid = 1;
+				}
+				else 
+				{
+					valid = 0;
+					break;
+				}
 			}
-			else 
+			if(!valid)
 			{
-				valid = 0;
-				break;
+				printf("\n\t\t Problem contains invalid characters. Please enter problem again. ");
+				E = 1;
 			}
 		}
-		if(!valid)
-		{
-			printf("\n\t\t Problem contains invalid characters. Please enter problem again. ");
-			goto E;
-		}
 	}
-	// Prescribed Doctor
-	F:
-	printf("\n\t\t\t Prescribed Doctor: ");
-	scanf("%s", p.Doctor);
-	p.Doctor[0]=toupper(p.Doctor[0]);
-	if (strlen(p.Doctor) > 30 || strlen(p.Doctor) < 3)
+	while(E != 0);
+	
+	int F = 0;
+	do
 	{
-		printf("\n\t Invalid Entry. Range of Doctor name is 3 chars to 30 chars.");
-		goto F;
-	}
-	else
-	{
-		for(b = 0; b < strlen(p.Doctor); b++)
+		printf("\n\t\t\t Prescribed Doctor: ");
+		scanf("%s", p.Doctor);
+		p.Doctor[0]=toupper(p.Doctor[0]);
+		if (strlen(p.Doctor) > 30 || strlen(p.Doctor) < 3)
 		{
-			if(isalpha(p.Doctor[b]))
-			{
-				valid = 1;
-			}
-			else
-			{
-				valid = 0;
-				break;
-			}
+			printf("\n\t Invalid Entry. Range of Doctor name is 3 chars to 30 chars.");
+			F = 1;
 		}
-		if(!valid)
+		else
 		{
-			printf("\n\t\t Doctor Name contains invalid characters. Please enter Doctor name again.");
-			goto F;
+			for(b = 0; b < strlen(p.Doctor); b++)
+			{
+				if(isalpha(p.Doctor[b]))
+				{
+					valid = 1;
+				}
+				else
+				{
+					valid = 0;
+					break;
+				}
+			}
+			if(!valid)
+			{
+				printf("\n\t\t Doctor Name contains invalid characters. Please enter Doctor name again.");
+				F = 1;
+			}
 		}
 	}
 	
-	fprintf(ek, " %s %s %c %i %s %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.Address, p.Contact_no, p.Email, p.Doctor);
+	fprintf(ek, " %s %s %c %i %s %s %s %s \n", p.First_Name, p.Last_Name, p.Gender, p.age, p.Address, p.Contact_no, p.Email, p.Doctor);
 	printf("\n\n\t\t\t Information Recorded Successfully");
 	fclose(ek); // ek file is closed
 	
-	sd:
-	getch();
-	printf("\n\n\t\t\t Do you want more records [Y/N]? ");
-	scanf(" %c", &ans);
-	if(toupper(ans) == 'Y')
+	int G = 0;
+	do
 	{
-		Add_rec();
-	}
-	else if(toupper(ans)=='N')
-	{
-		printf("\n\t\t Thank You. ");
+		G = 0;
 		getch();
-		MainMenu();
+		printf("\n\n\t\t\t Do you want more records [Y/N]? ");
+		scanf(" %c", &ans);
+		if(toupper(ans) == 'Y')
+		{
+			Add_rec();
+		}
+		else if(toupper(ans)=='N')
+		{
+			printf("\n\t\t Thank You. ");
+			getch();
+			MainMenu();
+		}
+		else
+		{
+			printf("\n\t\t Invalid Input \n");
+			G = 1;
+		}
 	}
-	else
-	{
-		printf("\n\t\t Invalid Input \n");
-		goto sd;
-	}
+	while(G != 0);
+	
 }
 
 void func_list()
