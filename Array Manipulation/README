@@ -7,11 +7,14 @@ d) Delete by position
 e) Delete by element (first occurrence of element)
   // I used 2 dynamic arrays to do this (arr and res). Run linear search algorithm on the original array (ie arr).          
      4 possible cases - 
-            i) First element of the array (ie arr[0])
+     
+            i) Element not found in array
+                      - element can't be deleted as it's not present in the array.
+            ii) First element of the array (ie arr[0])
                       - copy the array from arr[1] to arr[len-1] to the other array (ie res) and print res array.
-            ii) Last element of the array (ie arr[len-1])          
+            iii) Last element of the array (ie arr[len-1])          
                       - copy the array from arr[0] to arr[len-2] to the other array (ie res) and print res array.
-            iii) Any other 
+            iv) Any other 
                      - split the array into 2 parts- arr[0] to arr[i-1] and arr[i+1] to arr[len-1]
                      - copy these subarrays to res array.
                                   for elements in arr[0] to arr[i-1], res[i] = array[i];
