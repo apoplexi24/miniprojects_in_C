@@ -173,7 +173,7 @@ int mat_mul()
 	scanf("%d %d", &p, &q);
 
 	if (n != p)
-	printf("\nThe matrices can’t be multiplied with each other.\n");
+	printf("\nThe matrices canâ€™t be multiplied with each other.\n");
 	else
 	{
 		printf("\nEnter elements of Matrix 2: \n");
